@@ -1,21 +1,32 @@
 import random
 
-""" Elemanları 1-9 arası rakamlar içeren 100 elemanlı bir random bir liste 
-üreterek, bu liste üzerinde her bir rakamın kaç defa geçtiğini gösteren bir 
-sözlük yapısı kurun. """
+"""Code a program that finds the closest 2 numbers among 100 randomly generated numbers and prints the difference between them."""
+"""Rastgele oluşturulmuş 100 sayı arasından en yakın 2 sayıyı bulan ve aralarındaki farkı yazdıran bir program kodlayın."""
 
-liste = []
+fark = 0
+list1 = []
 for i in range(100):
-    sayı = random.randint(1, 9)
-    liste.append(sayı)
-print(liste)
+    x = random.randint(1, 100000)
+    list1.append(x)
 
-liste2 = []
-sözlük = {}
-for sayı in liste:
-    if sayı in liste2:
-        continue
-    sayı_hesaplama = liste.count(sayı)
-    sözlük.update({sayı: sayı_hesaplama})
-    liste2.append(sayı)
-print(sorted(sözlük.items()))
+sozluk_2 = {}
+for rakam1 in list1:
+    for rakam2 in list1:
+
+        if rakam1 == rakam2:
+            continue
+
+        if rakam1 > rakam2:
+            fark = rakam1 - rakam2
+            if fark < 0:
+                fark = fark * -1
+            sozluk_2.update({fark: [rakam1, rakam2]})
+
+        elif rakam2 > rakam1:
+            if fark < 0:
+                fark = fark * -1
+            fark = rakam2 - rakam1
+            sozluk_2.update({fark: [rakam1, rakam2]})
+
+sonuc = min(sozluk_2.items())
+print(sonuc)
